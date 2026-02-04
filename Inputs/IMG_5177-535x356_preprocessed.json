@@ -1,0 +1,23 @@
+{
+  "image_id": "sha256:a319a26478988116",
+  "source_filename": "IMG_5177-535x356.jpg",
+  "preprocessed_filename": "IMG_5177-535x356_preprocessed.jpg",
+  "preprocess": {
+    "original_size": [
+      535,
+      356
+    ],
+    "resized_size": [
+      535,
+      356
+    ],
+    "scale_factor": 1.0,
+    "max_side": 1024,
+    "keep_ratio": true,
+    "orientation": {
+      "exif_present": true,
+      "exif_orientation": 1,
+      "applied_rotation_deg": 0
+    }
+  }
+}

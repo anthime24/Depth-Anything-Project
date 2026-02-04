@@ -1,0 +1,19 @@
+{
+  "version": "depth_output_v1",
+  "image_id": "sha256:a319a26478988116",
+  "preprocessed_filename": "IMG_5177-535x356_preprocessed.jpg",
+  "image_size": [
+    535,
+    356
+  ],
+  "depth_file": "IMG_5177-535x356_depth.npy",
+  "depth_preview": "IMG_5177-535x356_depth_preview.png",
+  "depth_range": [
+    0.0,
+    1.0
+  ],
+  "normalized": true,
+  "near_is_one": true,
+  "model": "LiheYoung/depth_anything_vitl14",
+  "notes": "Depth computed on preprocessed image only; aligned pixel-to-pixel."
+}
