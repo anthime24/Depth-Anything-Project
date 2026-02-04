@@ -1,0 +1,2183 @@
+{
+  "version": "vision_output_v1",
+  "image_id": "sha256:a319a26478988116",
+  "image_size": [
+    535,
+    356
+  ],
+  "near_is_one": true,
+  "inputs": {
+    "sam_file": "Inputs/IMG_5177-535x356_preprocessed_sam_output.json",
+    "depth_file": "Outputs/IMG_5177-535x356_depth.npy",
+    "depth_meta": "Outputs/IMG_5177-535x356_depth.json"
+  },
+  "sam_output": {
+    "image_size": [
+      535,
+      356
+    ],
+    "segments_count": 90,
+    "segments": [
+      {
+        "segment_id": 0,
+        "area_ratio": 0.2872,
+        "bbox": [
+          0.0,
+          0.5983,
+          1.0,
+          0.3989
+        ],
+        "centroid": [
+          0.4967,
+          0.8464
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "^7n2V8001O2N1N3N1O1O3M1O2N1O1O2N1O2N0O2O001O0000000000000000000O10000000000O1000000O1000000000000000000000000O100000000001QMhHP2X7nMjHR2U7oMkHQ2V7lMmHS2S7kMoHU2Q7jMPIV2P7gMSIY2m6cMWI]2j6]M[Ic2e6WMaIi2^6WMcIi2\\7000000000001O00000000001O00000000000000000000001O0000000000O1O1000000O10000O1N2O100O1N2O1O100O1O1O1N2O1N20000O1O1O1000000000000001O000000000000000000\\OgL^IX3a6mL\\IR3d6QMYIo2g6RMXIn2h6TMVIl2j6g00000O10000000000000000O100000000000000O10000001O1O001O00001O0000000000001O000000001O000hLnH^2R7QMSI20i2n6QMgIm2Z7N00000000000000000000001O0000000000001O00000000001O000000000000000000001OO100001OO1001O00000000000000001O00O100002N00001O00000000000000000000000000000000000000000000000000000000000000001O00O10000001O0000O1O1O1000000000000000000000000001O001O001O001O1O0000001O0000000000001O0000O10000001O002N001O000000000000001O0000000000001O0000000000000000O1000000O100000000O10000O10000O100O10000O100O100001O00000000O1O10000O100O100O10000001O00N2N200O10000O10000O100000000O1000000O10000O1O1O100O100000000000000O100000000O100O1000000O10000O10000O10000O10000O1O10000O10000O10000O100O1000000O100O10000O1000000O10000O100O10000O1]O_LbIb3]6`LbI`3_6_LaIa3^6`LbI`3^6aL`I`3`6`L`I`3`6`L`I`3`6`L`I`3`6`L^Ib3a6`L]Ia3c6_L]Ia3c6`000000000001O000000001O00002NO1O100O11O0000YI"
+        },
+        "mean_depth": 0.28622695803642273,
+        "depth_std": 0.16914160549640656,
+        "depth_band": "back"
+      },
+      {
+        "segment_id": 1,
+        "area_ratio": 0.2008,
+        "bbox": [
+          0.0,
+          0.0,
+          0.4037,
+          0.5702
+        ],
+        "centroid": [
+          0.188,
+          0.2697
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "0S6Q5001O00001OO10000000000000000MQKQJo4o5RKPJn4P6300000000000000000000O1001OO100000000000000000000000000000000000000000000000000O11O0000O1000000000000000000001OO1001O0000O10000000000000000001O000000000000O1000000001O000001O1O01O001O100O000000010O0000000001O000001O10O01O010O001O00010O00O10001O01O00N3N1XOSKmJK2U5h4n00001O000O101O0O10000000000O1010O000G^KoId4n5:N201O000000O10000001O00000001O2N1aKPJh3g6O10O01O001O100O001O10O01N2O1N2O002N1O1N10001O1O001O1O001O1O2N0O2L\\k^3"
+        },
+        "mean_depth": 0.8034127354621887,
+        "depth_std": 0.06276597082614899,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 2,
+        "area_ratio": 0.087,
+        "bbox": [
+          0.5178,
+          0.0,
+          0.2636,
+          0.4888
+        ],
+        "centroid": [
+          0.6558,
+          0.2452
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "V]P33P;2M3N2N2VOFTF1=;^9LTF`0k9>O1N100O2N100O1\\OcNaG]1Z8kNcGV1[8lNdGT1[8oNbGR1]8SO\\GQ1b8i00001N2O1N1O4L6C9M4L3N2M2O2N1M3M4M2O2N1O1N3M3M3M4L3N2N2N10O100002N1O5K1O1O2M3N1O3MO1O0100O101N101O000O100000M30001N1001O0000010O1O0000001O000O20O000100O00O1O1O1O1O2N6J3L4M2N3M2M3N2N2O2L3kKTIP4R7N1N4M1O001O1O1N2M3N3M2]NaH_O`79XH_N`0U1X7;mHBV7nNaHl0>5`7FgH7Z7GiH6Y7ElH:U7EkH:Z7@hH`0Z7]OhHb0Y7\\OhHc0n8O2M2M3O3LcaX1"
+        },
+        "mean_depth": 0.8142338991165161,
+        "depth_std": 0.02105572447180748,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 3,
+        "area_ratio": 0.0625,
+        "bbox": [
+          0.0,
+          0.2669,
+          0.2486,
+          0.2725
+        ],
+        "centroid": [
+          0.1184,
+          0.4051
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "o2Q3S8000000O2OO11O01O00000000000000O100000000000000001O00000000000001O00000000000O2O0000000000000000000000000000000O101O0000000000000000001O0000000000000000000000000000001O0O100001O0000O100000001O0000000O10000000000000001O000000000000001O000O11O00000000000000O2O1OQ2nM>C`b[4"
+        },
+        "mean_depth": 0.7708265781402588,
+        "depth_std": 0.02027430571615696,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 4,
+        "area_ratio": 0.0541,
+        "bbox": [
+          0.3776,
+          0.0,
+          0.2019,
+          0.4242
+        ],
+        "centroid": [
+          0.4705,
+          0.1653
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "\\XV21P;4N2N1M4XOGXF2J:l9GXFc0f9?O1N2N2O1O1O1O1O2`F63jNL@e6^4L1O1O1O1O1O1O00O10000000000M300M3N200O1N2O1O1N2E;00000000001O001O2N000000O1O100001O00O100O1O1O1O100O1O10000O1O1L4O1N2QO_H[Na7e1`HeM0:a7Q2jHlMX7T2l0000000000000O100O1O1\\O]GgNc8V1bGfN`8W1eGgN[8Y1iG_N[8`1e0O100O100O2N2O0I7ROYF=Y:H8M2N201NaV^2"
+        },
+        "mean_depth": 0.934741735458374,
+        "depth_std": 0.0065850308164954185,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 5,
+        "area_ratio": 0.0491,
+        "bbox": [
+          0.2112,
+          0.0,
+          0.7888,
+          0.2135
+        ],
+        "centroid": [
+          0.7966,
+          0.0722
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "TYW11S;1O00001O0000001O0000001O0000001O000000001O00001O000000001O000000000000001O000000001O0000001O00N2Nno70feGMk9g0O1O001O1O1O1O001O001O0000O1M3O100O1M3GjECW:1fE6b:HeE2\\:MVfP1OaonN1[:0`E7]:801O001O1OO1000000O1O1N2K5O100N2N2O1O1O1O1001O1O1O0000000000O100OUX>OmgA2N7I2N1O1O1O1O1O1O00001eE^OR:d0kE^OT:k0N2N1O001O00003M1O2N1O000bFjNn8W1mFnNR9R1mFoNS9Q1mFoNS9Q1kFQOU9P1iFROV9`1N3M2N1O001O001O1O1O000000001O00000000O100O1O1N200O1000000O10000000000O100O100O100O1O1M3N200O100O1O1O1O1000000O1000000O100O1000000O10000O1000000001O00001O000000001O00001O1O2N0000001O1O001O1O001O1O00[OhF_OW9b0hF^OX9b0iF^OV9a0lFFl8:TGHj88VGJMSOh8R1\\GPOLi0h87]GnNMk0e87^GmNNl0d87cGI]87cGH^89`GEc8;]GEc8;]GDd8<]GBd8>\\G@f8`0ZGlNH`0o8d0]G[Oc8e0^GZOb8f0^GZOb8g0\\GkNE;P9j0_GTOb8l0cGnN^8R1cGlN^8"
+        },
+        "mean_depth": 0.9988779425621033,
+        "depth_std": 0.007664321456104517,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 6,
+        "area_ratio": 0.0485,
+        "bbox": [
+          0.0,
+          0.0,
+          0.2673,
+          0.236
+        ],
+        "centroid": [
+          0.1156,
+          0.1102
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "0X2l800000000000000000000000000001O00000000000000001O00000000000000001O00000000000000001O000000000000000000001O0000000000001O000000000000000000001O0000000000000000YN\\Gn0d8RO]Gn0b8RO^Gn0b8RO_Gm0a8TO^Gl0b8TO^Gl0b8TO^Gl0b8UO^Gj0b8VO^Gj0b8VO_Gi0a8WO_Gi0a8WO_Gi0a8WOcGf0\\8\\ObGd0^8\\OcGc0]8]OdGb0\\8_OeG?[8AeG?[8AfG>[8AeG?[8AfG>Z8BhG<Y8ChG=W8CiG=W8DiG;W8FiG9W8GjG8V8HkG7V8HjG8V8HlG6T8JmG5T8JmG5S8KmG5S8LnG2R8NoG1Q8OPH1o7NRH2n7HYH7h7F]H7c7I]H7c7H_H7a7HbH6^7IdH6\\7JdH6]7HdH8\\7GeH9\\7EeH;[7DfH<Z7DfH<Z7CkH9V7ElH:T7EoH9Q7GQI8n6HSI7m6HWI5i6KWI5j6JWI5i6KXI4h6LZI2g6MZI2f6NZI2f6NZI2g6MmZX4"
+        },
+        "mean_depth": 0.7803502678871155,
+        "depth_std": 0.052871137857437134,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 7,
+        "area_ratio": 0.0415,
+        "bbox": [
+          0.7121,
+          0.0,
+          0.2879,
+          0.2163
+        ],
+        "centroid": [
+          0.8661,
+          0.0785
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "d^T42R;0QEOk:9L3M1O1O1O1O001O00001dE_OS:k0N3M1O000000004L1O1O1O1O000000001O006J1eFbNn8_1mFiNo8g1O001O1O1O001O0000000000001O0000O1O100N2M300000000O1000000O10000L4O12N1O2N00O1O1M3O1O1O100O1O1O1O100000000O10000O100O10000000000O1O10000001O00001O000000001O00001O1O2N1O0000001O001O001O001O1OZOhF@X9`0iF@V9a0iF@V9`0jFAU9?kFIm86UGJj86VGQOMh0h87[GQONh0f87\\GPOOj0d86^GoNNk0d86^GoNNk0d86^GnNNm0d86]GmNOi0h8:ZGlNNi0i8;YGlNNi0i8;]GDd8<\\GBf8>ZGmNI`0n8c0^G\\Ob8d0^G[Oc8e0]G[Oc8f0[GZOf8f0YGnNF8Q9j0ZGlNL2l8S1aGlN`8"
+        },
+        "mean_depth": 0.9997362494468689,
+        "depth_std": 0.004052670206874609,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 8,
+        "area_ratio": 0.0219,
+        "bbox": [
+          0.3664,
+          0.6096,
+          0.1963,
+          0.1376
+        ],
+        "centroid": [
+          0.4686,
+          0.6753
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "j[T27k:6ZEHU:e0N3N1O2N2O0O10001N100001O000000000001O000000001O000000000000000O1O1O1000O10O1O100000000001O0000O2O001O0000000010O1N2O001O0000000O01000000N2O1000000O20O0O11N2O0010O2M2O00N2O2N101O0001O01O01N101O001N2O4L6I6WO_Ta2"
+        },
+        "mean_depth": 0.4819510877132416,
+        "depth_std": 0.01537957414984703,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 9,
+        "area_ratio": 0.016,
+        "bbox": [
+          0.7159,
+          0.3961,
+          0.157,
+          0.1713
+        ],
+        "centroid": [
+          0.804,
+          0.4742
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "UZU42o:6K4M1O1O1O2N1O101O2N1O002N0O100O1O1O1000001O001O0O100O100O2N1O2N2O0O1O0100O010000O10001N1O1O101O00001O00O1O100001O1O2N`N_F]1e90O1O1O4M1N1O02N100O1O001O1N2O1N3N1N1M5L4YOTFIW:2a0K]_g0"
+        },
+        "mean_depth": 0.7625215649604797,
+        "depth_std": 0.0100973816588521,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 10,
+        "area_ratio": 0.0148,
+        "bbox": [
+          0.7533,
+          0.2051,
+          0.1196,
+          0.1994
+        ],
+        "centroid": [
+          0.8067,
+          0.2903
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "`V\\49i:5F9K5L2L5M3M4N1N1N3N3M3N010O2N1O2N7J4K00O101N1O101N101N101N1O10000O100000O2O1OO1000000HjF_NOOW9V1iFRO`9k0gFoN[9P1=GTFXOo9g0700O100O2O0O101O1N2O1O1O3EZE2n:Maag0"
+        },
+        "mean_depth": 0.8648087978363037,
+        "depth_std": 0.00957799144089222,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 11,
+        "area_ratio": 0.0129,
+        "bbox": [
+          0.757,
+          0.4017,
+          0.114,
+          0.1657
+        ],
+        "centroid": [
+          0.8163,
+          0.4759
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "gn\\44l:=F9E300O2O0O1O1O1O2N1O2O0O1O10O1O10O100O10001N110O1O00001N11N1O100010O1O2OO01O1O1O5K100O0100O1O1O1O001O1N3N1N2N2K5[OTFMQ:Mg0Lbjg0"
+        },
+        "mean_depth": 0.7612175941467285,
+        "depth_std": 0.008486856706440449,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 12,
+        "area_ratio": 0.011,
+        "bbox": [
+          0.0,
+          0.5478,
+          0.1402,
+          0.0983
+        ],
+        "centroid": [
+          0.0648,
+          0.5965
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "X6n0V:000O1000000000000O10O10000000001O000O100000001O00000000O001000001O000000O2OO10O01000000O1000000000000O0100000001O001OO100001O2N1O2N2N1O1O2N2N2N2M2Njfo4"
+        },
+        "mean_depth": 0.6763893365859985,
+        "depth_std": 0.01110357791185379,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 13,
+        "area_ratio": 0.0107,
+        "bbox": [
+          0.5925,
+          0.6152,
+          0.0972,
+          0.1404
+        ],
+        "centroid": [
+          0.6388,
+          0.6839
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "l]^3?d:<C5L2O1N1O1O101N100O1O100O2O0O100000001N100000001O01O00000010O00010O0001N2O0O2O1N2M3K4O2N2M3O2N3M3L3MX_i1"
+        },
+        "mean_depth": 0.472022145986557,
+        "depth_std": 0.015190117061138153,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 14,
+        "area_ratio": 0.0094,
+        "bbox": [
+          0.0393,
+          0.2725,
+          0.0393,
+          0.264
+        ],
+        "centroid": [
+          0.0572,
+          0.4033
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "e\\7e1_9h0gFeMMOX8k2M2N0000000000000001O000000000000X1hNZ1eNQW[5"
+        },
+        "mean_depth": 0.7650982141494751,
+        "depth_std": 0.018645208328962326,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 15,
+        "area_ratio": 0.0087,
+        "bbox": [
+          0.0785,
+          0.2781,
+          0.0374,
+          0.2556
+        ],
+        "centroid": [
+          0.0957,
+          0.4047
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "[f>\\1h9k0\\FRN\\8b2I0000000000000000000000000001OR1nNS1[NbE43NWcT5"
+        },
+        "mean_depth": 0.7716448903083801,
+        "depth_std": 0.01584741286933422,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 16,
+        "area_ratio": 0.008,
+        "bbox": [
+          0.1159,
+          0.2809,
+          0.0355,
+          0.2528
+        ],
+        "centroid": [
+          0.1324,
+          0.4072
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "lde0b0b:V2jM1O1O0000000000000000000000O2O=_MiGMAW1X:^Odem4"
+        },
+        "mean_depth": 0.7833021283149719,
+        "depth_std": 0.016575846821069717,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 17,
+        "area_ratio": 0.0077,
+        "bbox": [
+          0.8523,
+          0.1292,
+          0.1103,
+          0.1236
+        ],
+        "centroid": [
+          0.9089,
+          0.1801
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "ibn47l:2N104K3M5K2N100O100000000O01000O100000O10O100O100000O101O001O0O100000001O0011O100O1N2M202M2O0O10O001O1O1O0DnEET:9PFCR:;=C^E5j:N\\l6"
+        },
+        "mean_depth": 0.9888094067573547,
+        "depth_std": 0.004971887916326523,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 18,
+        "area_ratio": 0.0076,
+        "bbox": [
+          0.1495,
+          0.2837,
+          0.0355,
+          0.2472
+        ],
+        "centroid": [
+          0.1667,
+          0.4071
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "[mk01n:b1TE`NY9e2QO000000000001O00000O1000001Oa0_O[1dN^]g4"
+        },
+        "mean_depth": 0.791569173336029,
+        "depth_std": 0.014633884653449059,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 19,
+        "area_ratio": 0.0073,
+        "bbox": [
+          0.2729,
+          0.4691,
+          0.0673,
+          0.1376
+        ],
+        "centroid": [
+          0.3029,
+          0.5412
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "nmb1g0Y:8MOO2lEROj9X1L4M2000010O0O100001O1O1O1N10001O001OO100001O001hNXFR1o9N1N2J5L9I5K4IXaj3"
+        },
+        "mean_depth": 0.7522600293159485,
+        "depth_std": 0.015591989271342754,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 20,
+        "area_ratio": 0.0068,
+        "bbox": [
+          0.8243,
+          0.5646,
+          0.1084,
+          0.0927
+        ],
+        "centroid": [
+          0.8821,
+          0.6056
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "i`i45m:4M2N1N200O1O10000O10001O00001O001O00001O001O1O1O3L2O1N101O0O100000O100O1O1O10000O110O0O110O001O1O1O0O3N1O1N3N4K3MgY<"
+        },
+        "mean_depth": 0.6683489680290222,
+        "depth_std": 0.02162088081240654,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 21,
+        "area_ratio": 0.0065,
+        "bbox": [
+          0.185,
+          0.2893,
+          0.0318,
+          0.2388
+        ],
+        "centroid": [
+          0.2,
+          0.4067
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "c`R1:j:]1cNm0SO1O000000000000O1000001O2`MWH3WOf00Dd:NQ`a4"
+        },
+        "mean_depth": 0.7702279686927795,
+        "depth_std": 0.009876563213765621,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 22,
+        "area_ratio": 0.0062,
+        "bbox": [
+          0.9308,
+          0.2191,
+          0.0692,
+          0.1713
+        ],
+        "centroid": [
+          0.9749,
+          0.2926
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "^W]53j:8N2N2N100O11O000000O1000000^ED\\:c0O003L2N1O100O2O2nEoNj9X1M200O2N3M101O1cF_NT9j1O0001O00aM"
+        },
+        "mean_depth": 0.7505426406860352,
+        "depth_std": 0.04577505961060524,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 23,
+        "area_ratio": 0.0062,
+        "bbox": [
+          0.1215,
+          0.5449,
+          0.0935,
+          0.1152
+        ],
+        "centroid": [
+          0.1731,
+          0.598
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Wif01S;1N10000QEOk:51N10O2O3M4L1O4L1O2N3M2N2N2N1O1O1O1O1O2N00001O0000001O000001O000lNVFn0j9PO\\Fl0P:O3L2N4L1O001O2N1O1O4K^ia4"
+        },
+        "mean_depth": 0.5409948825836182,
+        "depth_std": 0.004831572063267231,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 24,
+        "area_ratio": 0.0061,
+        "bbox": [
+          0.2168,
+          0.2921,
+          0.0299,
+          0.2331
+        ],
+        "centroid": [
+          0.2309,
+          0.4064
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "i]X141`0d0]Oo8Q2jFPNT8R2fGSNY8\\2001O000000000000000O3Ni1bMeEa0cX\\4"
+        },
+        "mean_depth": 0.7578110098838806,
+        "depth_std": 0.005416921339929104,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 25,
+        "area_ratio": 0.0049,
+        "bbox": [
+          0.4729,
+          0.0,
+          0.0224,
+          0.3455
+        ],
+        "centroid": [
+          0.4856,
+          0.175
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "fng22P;4N6J6gEDZ1`0e5Y1fHSNN_1Z7Y2N1O00O3Mo0ROh0\\MPG74g0oRn2"
+        },
+        "mean_depth": 0.9340280890464783,
+        "depth_std": 0.0024542612954974174,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 26,
+        "area_ratio": 0.0049,
+        "bbox": [
+          0.6393,
+          0.0,
+          0.0916,
+          0.0899
+        ],
+        "centroid": [
+          0.6874,
+          0.0381
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "jlf33P;2O1N2O001O2N1O00000000001O8H1O001O1O2N2N001O0000O10001O1O01O1O2N000000O1O2O1YOhE`0`:M3M2O1O1O2M101O1M]Qb1"
+        },
+        "mean_depth": 0.8606312870979309,
+        "depth_std": 0.013048654422163963,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 27,
+        "area_ratio": 0.0047,
+        "bbox": [
+          0.2692,
+          0.3118,
+          0.0411,
+          0.118
+        ],
+        "centroid": [
+          0.2894,
+          0.369
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "aUb1<f:m0UO1O0000000000000000000000000000000001O1OcUP4"
+        },
+        "mean_depth": 0.8724620342254639,
+        "depth_std": 0.005213339347392321,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 28,
+        "area_ratio": 0.0045,
+        "bbox": [
+          0.2729,
+          0.5225,
+          0.0654,
+          0.0843
+        ],
+        "centroid": [
+          0.305,
+          0.5624
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Ynb18j:6L000O5L5J2N100O2O0O10000000000000O11O00O2O0000000000001O1N2I7L3N3MZlj3"
+        },
+        "mean_depth": 0.7426453232765198,
+        "depth_std": 0.006788186263293028,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 29,
+        "area_ratio": 0.0042,
+        "bbox": [
+          0.3327,
+          0.5393,
+          0.0729,
+          0.0871
+        ],
+        "centroid": [
+          0.3658,
+          0.5788
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "fRn17k:3M3M3O0O2M2O2O0O2O2M101N10001O00000O100000O100O10001K4N2HgEC\\:<6O2O1N2O001O1O1O`[^3"
+        },
+        "mean_depth": 0.7016497850418091,
+        "depth_std": 0.013681828044354916,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 30,
+        "area_ratio": 0.0041,
+        "bbox": [
+          0.8243,
+          0.573,
+          0.0766,
+          0.0843
+        ],
+        "centroid": [
+          0.865,
+          0.608
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "i`i45m:3N2N2M200O1O10000O101O0000001O001O00001O001O1O1O3M1000O010O1O001N102N1N2N3M5K4LgVb0"
+        },
+        "mean_depth": 0.6536454558372498,
+        "depth_std": 0.01060769148170948,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 31,
+        "area_ratio": 0.0037,
+        "bbox": [
+          0.2561,
+          0.0871,
+          0.0486,
+          0.0899
+        ],
+        "centroid": [
+          0.2791,
+          0.1335
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Ue_1j0X:3O00010O01O001O00001O0010O000O10010O00000001O001OZYQ4"
+        },
+        "mean_depth": 0.8706583380699158,
+        "depth_std": 0.0024549257941544056,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 32,
+        "area_ratio": 0.0036,
+        "bbox": [
+          0.8636,
+          0.2022,
+          0.0748,
+          0.073
+        ],
+        "centroid": [
+          0.9006,
+          0.2352
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "UfP53Q;1O1O2N2M3N4L4L1O1N010000000O1000O10000O001000000O10O10O100000002N3M1O2N2M4M2M^\\;"
+        },
+        "mean_depth": 0.9684997797012329,
+        "depth_std": 0.013530530966818333,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 33,
+        "area_ratio": 0.0033,
+        "bbox": [
+          0.6916,
+          0.6657,
+          0.0542,
+          0.0815
+        ],
+        "centroid": [
+          0.713,
+          0.7057
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "hkP471;X:9O1000000O100000O10000O2O0O2O000O2O001O1N3M6K1O001N2O2MSQ_1"
+        },
+        "mean_depth": 0.5192587971687317,
+        "depth_std": 0.015769774094223976,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 34,
+        "area_ratio": 0.0033,
+        "bbox": [
+          0.3477,
+          0.0,
+          0.0449,
+          0.1011
+        ],
+        "centroid": [
+          0.3663,
+          0.0421
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "XeP287IO4S:g0O1O001O1O1O001O1O1O001O00L4O1O1@mEOS:1nELT:4lEJV:MiE05NT:1d0N2Oeo`3"
+        },
+        "mean_depth": 0.997993528842926,
+        "depth_std": 0.007821887731552124,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 35,
+        "area_ratio": 0.0031,
+        "bbox": [
+          0.0019,
+          0.559,
+          0.0542,
+          0.0843
+        ],
+        "centroid": [
+          0.0308,
+          0.5958
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "ca02n:5N1N3O2N004K2O1O002N1O1O4L1O001OO101O00001O2N1O1O3L5L>BR[_5"
+        },
+        "mean_depth": 0.6715731024742126,
+        "depth_std": 0.0073720240034163,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 36,
+        "area_ratio": 0.003,
+        "bbox": [
+          0.271,
+          0.4663,
+          0.0673,
+          0.073
+        ],
+        "centroid": [
+          0.3,
+          0.5016
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "abb1;i:6J1OO01O1M2O20O1O2O00O010001O1O2N1O0000001O10N10000000010OF\\E4e:I`E5g:1O10O4M\\lj3"
+        },
+        "mean_depth": 0.7717004418373108,
+        "depth_std": 0.015872448682785034,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 37,
+        "area_ratio": 0.0029,
+        "bbox": [
+          0.2841,
+          0.3118,
+          0.0262,
+          0.118
+        ],
+        "centroid": [
+          0.2963,
+          0.3701
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "`nd1i01]OR:S1H10O00O1001O000000001O6I^UP4"
+        },
+        "mean_depth": 0.8746568560600281,
+        "depth_std": 0.0015329868765547872,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 38,
+        "area_ratio": 0.0029,
+        "bbox": [
+          0.3196,
+          0.3174,
+          0.0299,
+          0.1124
+        ],
+        "centroid": [
+          0.3343,
+          0.3767
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Zbk13d:T1ZO01N1O000000000000000000000Olkh3"
+        },
+        "mean_depth": 0.8827612400054932,
+        "depth_std": 0.0018534292466938496,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 39,
+        "area_ratio": 0.0028,
+        "bbox": [
+          0.8729,
+          0.5618,
+          0.0598,
+          0.0843
+        ],
+        "centroid": [
+          0.9075,
+          0.5996
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "gaR51R;2O1N101O1N101O002N1O2N2N3M2N7J0O0001O01O01O1O1O1N101N3N2N6I3MfY<"
+        },
+        "mean_depth": 0.6928188800811768,
+        "depth_std": 0.015764303505420685,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 40,
+        "area_ratio": 0.0025,
+        "bbox": [
+          0.972,
+          0.4073,
+          0.028,
+          0.1208
+        ],
+        "centroid": [
+          0.987,
+          0.4724
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "cnd54m:5SOJfF:V9H`Fb0_9@_Fa0a9a0O2O000001O1O2N8H2NQK"
+        },
+        "mean_depth": 0.804347813129425,
+        "depth_std": 0.005031506065279245,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 41,
+        "area_ratio": 0.0024,
+        "bbox": [
+          0.4785,
+          0.4326,
+          0.0318,
+          0.177
+        ],
+        "centroid": [
+          0.4938,
+          0.5159
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "QVi25\\:ORF4k9NSF4k9NSF3^9K`F412]9LaF222\\9MbF212\\9O^F42O^9T10iN`F339NYOS99PG11a0P9[OQG216\\9FeF3O7^9DdF209k9FWF9j9DXF:\\:Milj2"
+        },
+        "mean_depth": 0.7293603420257568,
+        "depth_std": 0.05319816991686821,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 42,
+        "area_ratio": 0.0023,
+        "bbox": [
+          0.8953,
+          0.5169,
+          0.0523,
+          0.0618
+        ],
+        "centroid": [
+          0.9211,
+          0.5448
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "mfV53k:1VE1h:7O1N101N101O00001O001O1O1O010O01O1O001N101O1N2M3N4K_a9"
+        },
+        "mean_depth": 0.7808336019515991,
+        "depth_std": 0.0071908715181052685,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 43,
+        "area_ratio": 0.0023,
+        "bbox": [
+          0.9589,
+          0.5253,
+          0.0411,
+          0.0618
+        ],
+        "centroid": [
+          0.9796,
+          0.5562
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Vab57j:8K2M1O1O101O0000000O100001O00000000001O00SJ"
+        },
+        "mean_depth": 0.7875906825065613,
+        "depth_std": 0.004397324752062559,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 44,
+        "area_ratio": 0.0023,
+        "bbox": [
+          0.2093,
+          0.5506,
+          0.0598,
+          0.0646
+        ],
+        "centroid": [
+          0.2389,
+          0.5817
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "VTW13Q;2M2N2O2N1O2O0O2N1O1O100O2OO002N1N2O000000000O10O10O101N2N1O3L`gW4"
+        },
+        "mean_depth": 0.7248914837837219,
+        "depth_std": 0.011264340952038765,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 45,
+        "area_ratio": 0.0022,
+        "bbox": [
+          0.3047,
+          0.0,
+          0.0355,
+          0.073
+        ],
+        "centroid": [
+          0.3229,
+          0.0298
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "\\eh1?e:2N1O001O1O1O001O1O001O0000001O001OOUgj3"
+        },
+        "mean_depth": 0.9049214720726013,
+        "depth_std": 0.01006933581084013,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 46,
+        "area_ratio": 0.0022,
+        "bbox": [
+          0.5327,
+          0.4185,
+          0.0374,
+          0.0815
+        ],
+        "centroid": [
+          0.5487,
+          0.4589
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "`WS3336a:<J3M100O1O001O10O100O102N1O2M3M4J5L3Lii_2"
+        },
+        "mean_depth": 0.8909963369369507,
+        "depth_std": 0.002230309881269932,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 47,
+        "area_ratio": 0.0021,
+        "bbox": [
+          0.0,
+          0.6348,
+          0.1364,
+          0.0309
+        ],
+        "centroid": [
+          0.0628,
+          0.6474
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "W76n:000000O100000O1000000000000O1000000000O100000O100000000001O0O100000000O10O10000000O0100000000000000000O1000O1000000000000000000000O1000000001OOg\\P5"
+        },
+        "mean_depth": 0.6470006108283997,
+        "depth_std": 0.010462193749845028,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 48,
+        "area_ratio": 0.002,
+        "bbox": [
+          0.2037,
+          0.0,
+          0.1009,
+          0.0337
+        ],
+        "centroid": [
+          0.267,
+          0.0108
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "dlU11S;1O000000001O000000001O00001O000000001O00000000001O00001O00000000001O00001O000000001O000000001O00000000000`ZQ4"
+        },
+        "mean_depth": 0.9957571029663086,
+        "depth_std": 0.011374842375516891,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 49,
+        "area_ratio": 0.0019,
+        "bbox": [
+          0.5626,
+          0.6292,
+          0.0299,
+          0.0983
+        ],
+        "centroid": [
+          0.5783,
+          0.6709
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "dkX3237c:7N001O002N1O5L6J1N1O01O1O2Mb0^Oba[2"
+        },
+        "mean_depth": 0.5136802792549133,
+        "depth_std": 0.01573026552796364,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 50,
+        "area_ratio": 0.0018,
+        "bbox": [
+          0.9327,
+          0.3624,
+          0.0561,
+          0.0478
+        ],
+        "centroid": [
+          0.9587,
+          0.3842
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "gc]53o:2M4M2O1O1000000O2O001O0010O000O10001N100O101N101O0O2O2N2M_n1"
+        },
+        "mean_depth": 0.7959596514701843,
+        "depth_std": 0.005388920661062002,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 51,
+        "area_ratio": 0.0016,
+        "bbox": [
+          0.5794,
+          0.4747,
+          0.0449,
+          0.0478
+        ],
+        "centroid": [
+          0.5988,
+          0.4967
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Xn[38i:4N1O100O10000O101O000000000001O0O1J6O2O1N1O2OgfU2"
+        },
+        "mean_depth": 0.8432143330574036,
+        "depth_std": 0.016783252358436584,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 52,
+        "area_ratio": 0.0015,
+        "bbox": [
+          0.2561,
+          0.0899,
+          0.0206,
+          0.0787
+        ],
+        "centroid": [
+          0.2652,
+          0.1293
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Ue_1g0\\:4M01O01O0001O001O5KT`V4"
+        },
+        "mean_depth": 0.8683282732963562,
+        "depth_std": 0.0011810354189947248,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 53,
+        "area_ratio": 0.0015,
+        "bbox": [
+          0.2822,
+          0.1011,
+          0.0224,
+          0.0758
+        ],
+        "centroid": [
+          0.2923,
+          0.1373
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Rad1?6BV:h0O001O00000010O001O=XOZE7dcQ4"
+        },
+        "mean_depth": 0.8729798793792725,
+        "depth_std": 0.0009356570080853999,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 54,
+        "area_ratio": 0.0015,
+        "bbox": [
+          0.5645,
+          0.0,
+          0.0467,
+          0.0534
+        ],
+        "centroid": [
+          0.5838,
+          0.0214
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "hoX31S;0YE0Z:1bE5[:KcE7]:IaE:^:601O000000000000N2K5O1O1O1O1O1N2O1O1O1OQZX2"
+        },
+        "mean_depth": 0.9938385486602783,
+        "depth_std": 0.01361957285553217,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 55,
+        "area_ratio": 0.0015,
+        "bbox": [
+          0.9477,
+          0.1011,
+          0.0523,
+          0.0702
+        ],
+        "centroid": [
+          0.9805,
+          0.1217
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "`Y`52R;1O00001O0000001SENf:2ZEOe:1ZE0f:1YEOg:700000O1010O1O1O1O0010O0O14ZEC]:b010hN"
+        },
+        "mean_depth": 0.9088238477706909,
+        "depth_std": 0.09023308753967285,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 56,
+        "area_ratio": 0.0014,
+        "bbox": [
+          0.4804,
+          0.4298,
+          0.028,
+          0.0983
+        ],
+        "centroid": [
+          0.4933,
+          0.4732
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "b`i24o:2_O0lE1Q:2mE0R:1mEOR:3kE0T:e0J20L3]ORFMR:1oENR:1nEOT:OnEMW:0jE0f:N_Xk2"
+        },
+        "mean_depth": 0.7826319932937622,
+        "depth_std": 0.05289667472243309,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 57,
+        "area_ratio": 0.0013,
+        "bbox": [
+          0.2093,
+          0.5506,
+          0.0336,
+          0.0646
+        ],
+        "centroid": [
+          0.2284,
+          0.5773
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "VTW13Q;2M2O1N3N1O2O0O2N1O1O100O100O02M3NYc\\4"
+        },
+        "mean_depth": 0.7212918400764465,
+        "depth_std": 0.012571492232382298,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 58,
+        "area_ratio": 0.0013,
+        "bbox": [
+          0.4486,
+          0.5393,
+          0.0224,
+          0.0702
+        ],
+        "centroid": [
+          0.4586,
+          0.5747
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Vdc252M04_:>M3N1O10000001N3N3K4KWVR3"
+        },
+        "mean_depth": 0.7177644968032837,
+        "depth_std": 0.0642961785197258,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 59,
+        "area_ratio": 0.0012,
+        "bbox": [
+          0.4785,
+          0.5309,
+          0.0318,
+          0.0646
+        ],
+        "centroid": [
+          0.4944,
+          0.5524
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "QVi26l:3O1N2O001O0O2O1O7I00I7O1O2O0O3Ljlj2"
+        },
+        "mean_depth": 0.6926305294036865,
+        "depth_std": 0.019922591745853424,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 60,
+        "area_ratio": 0.0012,
+        "bbox": [
+          0.2692,
+          0.2837,
+          0.0617,
+          0.0253
+        ],
+        "centroid": [
+          0.2969,
+          0.2967
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "UUb17m:1O000001O0001O000000000001O0000000000000000001O0000000000000O2N`[l3"
+        },
+        "mean_depth": 0.8749198913574219,
+        "depth_std": 0.004910659044981003,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 61,
+        "area_ratio": 0.0012,
+        "bbox": [
+          0.9495,
+          0.1011,
+          0.0505,
+          0.0421
+        ],
+        "centroid": [
+          0.9796,
+          0.1174
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "ed`51R;2O0000001O000TEOe:1[EOe:2ZENf:2ZENf:3XENh:7001O0O1001O003M1O01O0O101O00iN"
+        },
+        "mean_depth": 0.886920690536499,
+        "depth_std": 0.08904454857110977,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 62,
+        "area_ratio": 0.0011,
+        "bbox": [
+          0.4785,
+          0.5309,
+          0.0318,
+          0.0449
+        ],
+        "centroid": [
+          0.4943,
+          0.5499
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "QVi25m:4N1N2O001N101O001O00O100O101M4Milj2"
+        },
+        "mean_depth": 0.6921916007995605,
+        "depth_std": 0.020433802157640457,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 63,
+        "area_ratio": 0.0011,
+        "bbox": [
+          0.4617,
+          0.486,
+          0.0299,
+          0.0562
+        ],
+        "centroid": [
+          0.4738,
+          0.5141
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "`Qf26k:4N6J1N20000010N3N3L2N2N3N1O1NX\\n2"
+        },
+        "mean_depth": 0.8523076176643372,
+        "depth_std": 0.0284853745251894,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 64,
+        "area_ratio": 0.0011,
+        "bbox": [
+          0.2654,
+          0.6067,
+          0.0804,
+          0.0253
+        ],
+        "centroid": [
+          0.304,
+          0.6157
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "fba11R;2L4O00O10000O10000000O100000O10000000000000000O10000000O100000001O00000000O101O001No^i3"
+        },
+        "mean_depth": 0.7092319130897522,
+        "depth_std": 0.016435418277978897,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 65,
+        "area_ratio": 0.001,
+        "bbox": [
+          0.0,
+          0.9354,
+          0.028,
+          0.0646
+        ],
+        "centroid": [
+          0.0089,
+          0.9756
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "]:g0]:03M1O1O1O2N2N3M1O1O1O2N1O2Nn]d5"
+        },
+        "mean_depth": 0.058521345257759094,
+        "depth_std": 0.030237121507525444,
+        "depth_band": "back"
+      },
+      {
+        "segment_id": 66,
+        "area_ratio": 0.001,
+        "bbox": [
+          0.7383,
+          0.5169,
+          0.0299,
+          0.0421
+        ],
+        "centroid": [
+          0.751,
+          0.5349
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "U`Y48l:2N2M2O1O00000000O2N1O1O2O1N5JcmZ1"
+        },
+        "mean_depth": 0.7285775542259216,
+        "depth_std": 0.022222615778446198,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 67,
+        "area_ratio": 0.0009,
+        "bbox": [
+          0.0075,
+          0.4803,
+          0.0299,
+          0.0449
+        ],
+        "centroid": [
+          0.0213,
+          0.5004
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "na15n:3M1O201N2N1O000001N1O1O2N2O3Klkb5"
+        },
+        "mean_depth": 0.7344880700111389,
+        "depth_std": 0.009357621893286705,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 68,
+        "area_ratio": 0.0009,
+        "bbox": [
+          0.8355,
+          0.6236,
+          0.0355,
+          0.0478
+        ],
+        "centroid": [
+          0.8543,
+          0.6425
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "lck42Q;2N2O1O001O1O10000O1O2N100O00O2N2M3Jehg0"
+        },
+        "mean_depth": 0.6253743767738342,
+        "depth_std": 0.007601309102028608,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 69,
+        "area_ratio": 0.0009,
+        "bbox": [
+          0.671,
+          0.7163,
+          0.0187,
+          0.0534
+        ],
+        "centroid": [
+          0.6802,
+          0.7431
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "URm38f:6O2M20000O100000Nk^i1"
+        },
+        "mean_depth": 0.4580615758895874,
+        "depth_std": 0.00542087946087122,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 70,
+        "area_ratio": 0.0009,
+        "bbox": [
+          0.3308,
+          0.4803,
+          0.0916,
+          0.0225
+        ],
+        "centroid": [
+          0.3757,
+          0.4893
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "dfm13Q;0O10O1000O100000O1000000000000000O1000000000O1000000000O10000000000000O100000000000O1000O100000YX[3"
+        },
+        "mean_depth": 0.855975329875946,
+        "depth_std": 0.01339569129049778,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 71,
+        "area_ratio": 0.0008,
+        "bbox": [
+          0.4804,
+          0.4775,
+          0.0299,
+          0.0478
+        ],
+        "centroid": [
+          0.4933,
+          0.4958
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "b`i25n:2N2N2O1O1O1N3NN2N3N2O0O2L3O2M\\mj2"
+        },
+        "mean_depth": 0.7586247324943542,
+        "depth_std": 0.04195452108979225,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 72,
+        "area_ratio": 0.0008,
+        "bbox": [
+          0.6935,
+          0.1124,
+          0.0262,
+          0.0843
+        ],
+        "centroid": [
+          0.7046,
+          0.1534
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "ePQ45n:4M4M1O20O010O11OM3N1M3N4KfRd1"
+        },
+        "mean_depth": 0.7969141006469727,
+        "depth_std": 0.001456251717172563,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 73,
+        "area_ratio": 0.0008,
+        "bbox": [
+          0.5794,
+          0.4747,
+          0.0449,
+          0.0281
+        ],
+        "centroid": [
+          0.6008,
+          0.486
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Wn[33o:3N1O01O010O10O1000O10000001O100O00O101O001N2OgfU2"
+        },
+        "mean_depth": 0.8564028143882751,
+        "depth_std": 0.01010129228234291,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 74,
+        "area_ratio": 0.0007,
+        "bbox": [
+          0.0336,
+          0.0084,
+          0.043,
+          0.0309
+        ],
+        "centroid": [
+          0.0543,
+          0.0232
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "[X62R;2N100O1O1O01O01O0000010O000001O00010O1O1O1N^g[5"
+        },
+        "mean_depth": 0.804404079914093,
+        "depth_std": 0.013709678314626217,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 75,
+        "area_ratio": 0.0007,
+        "bbox": [
+          0.4841,
+          0.4298,
+          0.0224,
+          0.0478
+        ],
+        "centroid": [
+          0.4938,
+          0.4493
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "YVj26l:3O1N2O4K11M2N3M201N3MSdk2"
+        },
+        "mean_depth": 0.812488853931427,
+        "depth_std": 0.04723610356450081,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 76,
+        "area_ratio": 0.0006,
+        "bbox": [
+          0.9757,
+          0.1854,
+          0.0243,
+          0.0365
+        ],
+        "centroid": [
+          0.9888,
+          0.2049
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "bae52Q;3M2N1N2O100000O010000O2mM"
+        },
+        "mean_depth": 0.9566001296043396,
+        "depth_std": 0.019630014896392822,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 77,
+        "area_ratio": 0.0006,
+        "bbox": [
+          0.7252,
+          0.7528,
+          0.0336,
+          0.0309
+        ],
+        "centroid": [
+          0.7415,
+          0.7658
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "nTW43Q;0O2O0O10001O1O1O000101N1O100O1O1O`b\\1"
+        },
+        "mean_depth": 0.45322906970977783,
+        "depth_std": 0.01654917374253273,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 78,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.4542,
+          0.9354,
+          0.0336,
+          0.0197
+        ],
+        "centroid": [
+          0.4714,
+          0.944
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "kid21R;2O1O1O1N100001O0000O1000000001N2Oimn2"
+        },
+        "mean_depth": 0.10006138682365417,
+        "depth_std": 0.008888224139809608,
+        "depth_band": "back"
+      },
+      {
+        "segment_id": 79,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.1944,
+          0.4747,
+          0.0243,
+          0.0281
+        ],
+        "centroid": [
+          0.2068,
+          0.4873
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "^ZT11Q;3N2N2N2O000000000001N2MoTa4"
+        },
+        "mean_depth": 0.7619646191596985,
+        "depth_std": 0.004498356021940708,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 80,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.415,
+          0.764,
+          0.0187,
+          0.0562
+        ],
+        "centroid": [
+          0.4252,
+          0.7949
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "k^]21Q;2O1J6FJfE5[::1O1N5K4LTRY3"
+        },
+        "mean_depth": 0.37548744678497314,
+        "depth_std": 0.028730526566505432,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 81,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.6206,
+          0.5028,
+          0.0243,
+          0.0253
+        ],
+        "centroid": [
+          0.6324,
+          0.5139
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Tcc331Nn:5N2O001O000000000001O1OSlQ2"
+        },
+        "mean_depth": 0.789986252784729,
+        "depth_std": 0.021754497662186623,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 82,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.6598,
+          0.4101,
+          0.0206,
+          0.0309
+        ],
+        "centroid": [
+          0.6687,
+          0.4227
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "gkj35n:3N2N001O00O101N2N3MgYk1"
+        },
+        "mean_depth": 0.844158411026001,
+        "depth_std": 0.00645998353138566,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 83,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.4729,
+          0.5927,
+          0.028,
+          0.0225
+        ],
+        "centroid": [
+          0.487,
+          0.602
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "ZUh22Q;2N2O000O1000001O000000O102Mhcl2"
+        },
+        "mean_depth": 0.6137191653251648,
+        "depth_std": 0.03525225818157196,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 84,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.8093,
+          0.7247,
+          0.043,
+          0.0253
+        ],
+        "centroid": [
+          0.8287,
+          0.7367
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "Wif44P;001O0O11O001O00000001O000100O0010O0001O0000dVk0"
+        },
+        "mean_depth": 0.5076303482055664,
+        "depth_std": 0.012480967678129673,
+        "depth_band": "mid"
+      },
+      {
+        "segment_id": 85,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.2187,
+          0.0674,
+          0.0243,
+          0.0309
+        ],
+        "centroid": [
+          0.2279,
+          0.082
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "]fX17l:2O00000100O1O1O1O1O100Neh\\4"
+        },
+        "mean_depth": 0.8682674169540405,
+        "depth_std": 0.0015677452320232987,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 86,
+        "area_ratio": 0.0005,
+        "bbox": [
+          0.3121,
+          0.4663,
+          0.0299,
+          0.0253
+        ],
+        "centroid": [
+          0.3289,
+          0.4771
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "VWj11R;1O2O00000O101O0O2O1O01O001N1OiVj3"
+        },
+        "mean_depth": 0.8659363389015198,
+        "depth_std": 0.010791605338454247,
+        "depth_band": "front"
+      },
+      {
+        "segment_id": 87,
+        "area_ratio": 0.0003,
+        "bbox": [
+          0.7196,
+          0.9438,
+          0.0224,
+          0.0225
+        ],
+        "centroid": [
+          0.7301,
+          0.9534
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "fUV42Q;101N2O1O000100O001N3Mdd_1"
+        },
+        "mean_depth": 0.09053926169872284,
+        "depth_std": 0.009173931553959846,
+        "depth_band": "back"
+      },
+      {
+        "segment_id": 88,
+        "area_ratio": 0.0003,
+        "bbox": [
+          0.4374,
+          0.8567,
+          0.0243,
+          0.0197
+        ],
+        "centroid": [
+          0.4477,
+          0.8651
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "jda24P;1O0O110O000000O100O1O1O_jS3"
+        },
+        "mean_depth": 0.23916062712669373,
+        "depth_std": 0.007863184437155724,
+        "depth_band": "back"
+      },
+      {
+        "segment_id": 89,
+        "area_ratio": 0.0001,
+        "bbox": [
+          0.7626,
+          0.8539,
+          0.0112,
+          0.014
+        ],
+        "centroid": [
+          0.7675,
+          0.8592
+        ],
+        "mask_rle": {
+          "size": [
+            356,
+            535
+          ],
+          "counts": "aT^42Q;2O0010O0OdhY1"
+        },
+        "mean_depth": 0.2706789970397949,
+        "depth_std": 0.006335719022899866,
+        "depth_band": "back"
+      }
+    ]
+  }
+}
