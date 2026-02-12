@@ -1,0 +1,161 @@
+{
+  "version": "plantable_zone_poc_v1",
+  "image_id": "sha256:a319a26478988116",
+  "image_size": [
+    535,
+    356
+  ],
+  "config": {
+    "position": {
+      "min_y_centroid": 0.55
+    },
+    "depth": {
+      "allowed_bands": [
+        "front",
+        "mid"
+      ]
+    },
+    "color": {
+      "min_green_ratio": 0.3,
+      "min_brown_ratio": 0.2
+    },
+    "anchors": {
+      "num_points": 15,
+      "min_distance": 0.08,
+      "border_margin": 0.05
+    },
+    "morphology": {
+      "cleanup": true,
+      "erosion_size": 3
+    }
+  },
+  "plantable": {
+    "coverage": 0.0826,
+    "segment_ids": [
+      8,
+      12,
+      13,
+      20,
+      23,
+      28,
+      29,
+      30,
+      33,
+      35,
+      39,
+      43,
+      44,
+      49,
+      57,
+      58,
+      59,
+      64,
+      68,
+      69,
+      77,
+      80,
+      83,
+      84
+    ],
+    "total_pixels": 15736,
+    "mask_rle": {
+      "size": [
+        356,
+        535
+      ],
+      "counts": "X6n0V:000O1000000000000O10O10000000001O000O100000001O00000000O001000001O000000O2OO10O01000000O1000000000000O0100000001O001OO100001O2N1O2NH\\ORFb0n9^OSFa0m9_OTF`0l9CSF;n9DTF:l9FVF8i9JXF3i90UFNl96?1O4L1O2N3M2N2N2N1O1O1O1O1O2N00001O0000001O000001O000lNVFn0T:L2O3L2N4L1O001O2NYOEfF:Z9HeF7Z9KiF0W92m02N1O2O0O2N1O1O100O2OO002N1N2O000000000O10O10O101N2N1O3L]ENd:300WO2\\FNb98ZFHf98ZFHf98ZFGf9>VFBj9c0QF]On9e0QF[On9f0RFZOn9f0QF[On9g0QFYOo9g0QFYOn9h0RFWOo9i0QFWOo9i0QFWOo9i0QFWOo9i0QFWOo9i0QFWOo9i0QFWOo9h0RFXOn9h0RFXOn9h0RFWOo9i0QFWOP:h0PFXOP:h0PFXOP:h0PFXOP:h0oEYOQ:g0oEYOQ:g0oEYOQ:g0oEYOR:f0nE[OR:c0oE]OR:<TFDm98lEI2OR:6lEN1LT:3kE40H^:`00KbED]:b0NN32O0O2O2M101N10001O00000UFYOX9h0fF^OLHP9j0QGKo85oFNP91PG0P90oF2P9MPG5o8KQG5o8KPG6Q9ESG;m8CUG>j8ZO]Gg0d8XO\\Gh0d8WO]Gi0d8VO]Gi0d8UO]Gk0d8TO\\Gl0d8TO\\Gl0e8SO[Gm0f8ROZGn0g8QOYGP1]9000000001O000nFmNS8S1lGnNT8R1fGTOZ8l0]GmNJ6j8m0\\G\\Od8d0\\G\\Od8d0]GZOc8g0aGTO_8m0dGoN\\8R1k000O10O1O10000\\OkNPG1MT1Q9ZOnFf0P9]OoFc0P9^OQGa0n8@RG`0n8@RG`0n8@QGb0n8^ORGb0o8\\ORGe0o8YOQGg0R9TOPGl0R9oNQGQ1a9000KhN_FW1`9kN`FT1m8lN^G0FS1j8PO_GMGS1j8QO]GMJQ1h8TO]GKKQ1h8TO]GKKQ1h8UO\\GKKP1i8UO\\GKKo0i8XO[GIKP1j8XOZGHLP1j8XOZGGMQ1i8XOZGGMQ1i8XO\\GDJV1j8UObGl0^8SOcGm0^8RObGn0^8QOcGo0_8mNcGS1W900001N2O0001O2N1O00N2O2N101O0001O00001O001O001N2O4L6I6WO<307N001O002N1O5L6J1N1O01O1O2Mb0^OB59<C5L2O1N1O1O101N100O1O100O2O0O100000001N100000001O01O00000010O00010O0001N2O0O2O1N2MTFSOf9U1010O1O1O2N3M3M2ZOnE4We0FiZO;X:9O1000000O100000O10000O2O0O2O000O2OjE]Ok9c0UF]Ol9b0SF@m9>TFBn9;RFFS:5mEKT:4lEMS:3mENS:0nE1R:NnE2T:KmE5b:01N1O100O1O1Ok[91TdF001O00000001OaN1iGOU85iGKV87iGIV88jGIS89mGGS89mGGR8:oGFo7;kFDQ10T8<jFFQ1NU8<jFGQ1MS8=lFFQ1MS8f0lGZOT8g0lGXOT8i0kGWOU8?lFHn0IV8`0lFGU:9kEHT:f0N1OBoEIQ:e0000O1N2K51N2N2O0O2O000O1000O100O1O1O10000O2O000010O0001O1O1O1N101O2M3N5J3MQk4OnTK8K2M1O1O101O0000000O100001O00000000001O00SJ"
+    },
+    "anchors": [
+      {
+        "id": "p1",
+        "x": 0.882,
+        "y": 0.635,
+        "score": 0.63
+      },
+      {
+        "id": "p2",
+        "x": 0.077,
+        "y": 0.556,
+        "score": 0.56
+      },
+      {
+        "id": "p3",
+        "x": 0.288,
+        "y": 0.615,
+        "score": 0.62
+      },
+      {
+        "id": "p4",
+        "x": 0.708,
+        "y": 0.725,
+        "score": 0.72
+      },
+      {
+        "id": "p5",
+        "x": 0.355,
+        "y": 0.612,
+        "score": 0.61
+      },
+      {
+        "id": "p6",
+        "x": 0.407,
+        "y": 0.705,
+        "score": 0.71
+      },
+      {
+        "id": "p7",
+        "x": 0.525,
+        "y": 0.694,
+        "score": 0.69
+      },
+      {
+        "id": "p8",
+        "x": 0.63,
+        "y": 0.618,
+        "score": 0.62
+      },
+      {
+        "id": "p9",
+        "x": 0.606,
+        "y": 0.728,
+        "score": 0.73
+      },
+      {
+        "id": "p10",
+        "x": 0.114,
+        "y": 0.618,
+        "score": 0.62
+      },
+      {
+        "id": "p11",
+        "x": 0.428,
+        "y": 0.778,
+        "score": 0.78
+      },
+      {
+        "id": "p12",
+        "x": 0.568,
+        "y": 0.649,
+        "score": 0.65
+      },
+      {
+        "id": "p13",
+        "x": 0.458,
+        "y": 0.626,
+        "score": 0.63
+      },
+      {
+        "id": "p14",
+        "x": 0.23,
+        "y": 0.59,
+        "score": 0.59
+      },
+      {
+        "id": "p15",
+        "x": 0.826,
+        "y": 0.615,
+        "score": 0.62
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "version": "preprocess_v1",
+  "image_id": "sha256:a573f6e7588c127c",
+  "preprocessed_filename": "WhatsApp Image 2026-02-10 at 14.05.13-400x225.jpg",
+  "preprocess": {
+    "original_filename": "WhatsApp Image 2026-02-10 at 14.05.13.jpeg",
+    "original_size": [
+      1600,
+      901
+    ],
+    "resized_size": [
+      400,
+      225
+    ],
+    "orientation": "landscape",
+    "scale": 0.25,
+    "exif_orientation": 1
+  }
+}

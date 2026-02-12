@@ -1,7 +1,14 @@
 """
-compute_plantable_zone.py - VERSION FINALE OPTIMISÉE
+compute_plantable_zone_FINAL.py
 
-Accepte la pelouse en arrière-plan (back) tout en excluant murs et mobilier.
+VERSION FINALE : Ground - Objects - Existing Vegetation
+
+Pipeline:
+A) Ground candidate (sol)
+B) Objects on ground (mobilier)
+C) Existing vegetation (plantes déjà en place)
+D) Plantable = Ground - Objects - Existing vegetation
+E) Material filter (herbe libre seulement)
 """
 
 import json
@@ -9,269 +16,292 @@ import numpy as np
 import cv2
 from pycocotools import mask as mask_utils
 from pathlib import Path
-from typing import List, Tuple, Dict
+from typing import List, Dict
+from scipy.ndimage import binary_dilation, binary_erosion, binary_fill_holes
 
 
-# ============ Configuration OPTIMISÉE ============
 VISION_JSON = Path("VisionOutput.json")
 IMAGE_PATH = Path("Inputs/IMG_5177-535x356_preprocessed.jpg")
-OUT_JSON = Path("PlantableZone.json")
+OUT_JSON = Path("PlantableZone_FINAL.json")
 
-# Seuils OPTIMISÉS : strict sur murs/mobilier, permissif sur pelouse
 CONFIG = {
-    "position": {
-        "min_y_centroid": 0.50,  # ⬇️ Légèrement assoupli pour pelouse haute
-        "min_y_bbox": 0.45,      # ⬇️ Assoupli
+    # A) Ground
+    "ground": {
+        "min_y_centroid": 0.55,
+        "min_area_ratio": 0.03,
+        "min_bbox_width": 0.35,
+        "max_depth_std": 0.25,
     },
-    "depth": {
-        # ✅ CHANGEMENT CLÉ : accepter "back" pour pelouse arrière-plan
-        "allowed_bands": ["front", "mid", "back"],  # Tout accepté
-        "max_mean_depth": 0.90,   # Objets très proches (mobilier 3D)
-        "min_mean_depth": 0.15,   # ⬇️ Assoupli pour pelouse lointaine
+    
+    # B) Objects (mobilier)
+    "objects": {
+        "min_intersection": 0.60,
+        "max_area_ratio": 0.05,
+        "compact_threshold": 0.65,
     },
-    "color": {
-        "min_green_ratio": 0.30,      # ⬇️ Légèrement assoupli
-        "min_brown_ratio": 0.20,      # ⬇️ Assoupli
-        "max_gray_ratio": 0.65,       # ⬆️ Légèrement plus permissif
-        "require_saturation": True,
-        "min_saturation": 25,         # ⬇️ Assoupli pour herbe sèche
+    
+    # C) Existing vegetation (NOUVEAU)
+    "existing_vegetation": {
+        "min_green_ratio": 0.50,        # Très vert (plantes denses)
+        "min_saturation": 40,            # Couleur vive
+        "min_area_ratio": 0.005,         # > 0.5% (pas trop petit)
+        "max_area_ratio": 0.15,          # < 15% (pas toute la pelouse)
+        "check_texture": True,           # Texture non-uniforme (feuilles)
+        "texture_variance_threshold": 30, # Variance de texture
+        "exclude_lawn": True,            # Ne pas exclure la pelouse uniforme
+        "lawn_min_area": 0.10,           # Pelouse = grande zone (> 10%)
     },
-    "shape": {
-        "max_aspect_ratio": 3.5,      # ⬆️ Légèrement assoupli
-        "min_area_ratio": 0.005,      # ⬇️ Assoupli (0.5%)
-        "max_area_ratio": 0.40,       # ⬆️ Assoupli pour grande pelouse
+    
+    # D) Lawn (pelouse libre)
+    "lawn": {
+        "min_green_ratio": 0.30,         # Modérément vert
+        "max_green_ratio": 0.70,         # Pas trop vert (évite massifs denses)
+        "min_saturation": 20,
+        "max_saturation": 60,            # Pas trop saturé (massifs très vifs)
+        "texture_uniformity": True,      # Texture uniforme
+        "max_texture_variance": 25,      # Faible variance
     },
-    "texture": {
-        "check_edge_density": True,
-        "max_edge_ratio": 0.35,       # ⬆️ Légèrement assoupli
+    
+    # E) Morphologie
+    "morphology": {
+        "fill_holes": True,
+        "smooth_iterations": 2,
+        "kernel_size": 5,
     },
-    "special_rules": {
-        # Règle spéciale : pelouse peut être "back" si grande et verte
-        "allow_back_if_large_green": True,
-        "large_green_min_area": 0.05,      # > 5% de l'image
-        "large_green_min_green_ratio": 0.40,  # > 40% de pixels verts
-    },
+    
+    # F) Anchors
     "anchors": {
         "num_points": 15,
+        "min_distance": 0.08,
+        "border_margin": 0.05,
     }
 }
 
 
+def compute_texture_variance(img: np.ndarray, mask: np.ndarray) -> float:
+    """
+    Calcule la variance de texture dans un segment.
+    Texture uniforme (pelouse) : variance faible (~10-20)
+    Texture complexe (massif) : variance élevée (~40-60)
+    """
+    if mask.sum() == 0:
+        return 0.0
+    
+    # Convertir en niveaux de gris
+    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    
+    # Extraire les pixels du segment
+    pixels = img_gray[mask]
+    
+    # Variance
+    variance = float(np.var(pixels))
+    
+    return variance
+
+
 def compute_color_features(img: np.ndarray, mask: np.ndarray) -> Dict:
-    """Analyse couleur avec détection saturation et gris."""
-    pixels = img[mask]
+    """Analyse couleur HSV complète."""
+    pixels_rgb = img[mask]
     
-    if len(pixels) == 0:
+    if len(pixels_rgb) == 0:
         return {
-            "mean_rgb": [0, 0, 0],
-            "mean_hsv": [0, 0, 0],
             "green_ratio": 0.0,
-            "brown_ratio": 0.0,
-            "gray_ratio": 0.0,
-            "mean_saturation": 0.0
+            "mean_saturation": 0.0,
+            "mean_value": 0.0,
         }
-    
-    mean_rgb = pixels.mean(axis=0).tolist()
     
     img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     pixels_hsv = img_hsv[mask]
-    mean_hsv = pixels_hsv.mean(axis=0).tolist()
-    mean_saturation = float(pixels_hsv[:, 1].mean())
     
-    # Vert (végétation)
-    green_mask = (
-        (pixels_hsv[:, 0] >= 35) & (pixels_hsv[:, 0] <= 85) &
-        (pixels_hsv[:, 1] > 25) &  # Légèrement assoupli
-        (pixels_hsv[:, 2] > 25)
-    )
-    green_ratio = green_mask.sum() / len(pixels)
+    # Vert
+    green_mask = (pixels_hsv[:, 0] >= 35) & (pixels_hsv[:, 0] <= 85)
+    green_ratio = green_mask.sum() / len(pixels_hsv)
     
-    # Brun (sol)
-    brown_mask = (
-        (pixels_hsv[:, 0] >= 10) & (pixels_hsv[:, 0] <= 30) &
-        (pixels_hsv[:, 1] > 20) &
-        (pixels_hsv[:, 2] > 15) & (pixels_hsv[:, 2] < 130)
-    )
-    brown_ratio = brown_mask.sum() / len(pixels)
-    
-    # Gris (murs)
-    gray_mask = (
-        (pixels_hsv[:, 1] < 30) |
-        (
-            (pixels_hsv[:, 0] >= 15) & (pixels_hsv[:, 0] <= 35) &
-            (pixels_hsv[:, 1] < 40) &
-            (pixels_hsv[:, 2] > 80)
-        )
-    )
-    gray_ratio = gray_mask.sum() / len(pixels)
+    # Saturation et valeur moyennes
+    mean_sat = float(pixels_hsv[:, 1].mean())
+    mean_val = float(pixels_hsv[:, 2].mean())
     
     return {
-        "mean_rgb": [float(x) for x in mean_rgb],
-        "mean_hsv": [float(x) for x in mean_hsv],
         "green_ratio": float(green_ratio),
-        "brown_ratio": float(brown_ratio),
-        "gray_ratio": float(gray_ratio),
-        "mean_saturation": mean_saturation
+        "mean_saturation": mean_sat,
+        "mean_value": mean_val,
     }
 
 
-def compute_shape_features(segment: Dict, H: int, W: int) -> Dict:
-    """Features géométriques."""
-    bbox = segment.get("bbox", [0, 0, 1, 1])
-    bbox_w = bbox[2] * W
-    bbox_h = bbox[3] * H
-    aspect_ratio = bbox_h / bbox_w if bbox_w > 0 else 0
-    
-    return {
-        "aspect_ratio": float(aspect_ratio),
-        "bbox_y_start": float(bbox[1]),
-        "bbox_y_end": float(bbox[1] + bbox[3]),
-        "bbox_width": float(bbox_w),
-        "bbox_height": float(bbox_h)
-    }
-
-
-def compute_texture_features(img: np.ndarray, mask: np.ndarray) -> Dict:
-    """Détection contours pour mobilier."""
-    if mask.sum() == 0:
-        return {"edge_ratio": 0.0}
-    
-    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    edges = cv2.Canny(img_gray, 50, 150)
-    
-    edge_pixels = edges[mask].sum() / 255
-    total_pixels = mask.sum()
-    edge_ratio = edge_pixels / total_pixels if total_pixels > 0 else 0
-    
-    return {"edge_ratio": float(edge_ratio)}
-
-
-def is_plantable(
+def is_existing_vegetation(
     segment: Dict,
-    color_features: Dict,
-    shape_features: Dict,
-    texture_features: Dict,
+    img: np.ndarray,
+    mask: np.ndarray,
     config: Dict
-) -> Tuple[bool, List[str]]:
+) -> bool:
     """
-    Détermine si plantable avec règle spéciale pour pelouse en arrière-plan.
-    """
-    reasons = []
+    Détecte si un segment est de la végétation EXISTANTE (massifs, arbustes).
     
-    # Données du segment
-    centroid_y = segment.get("centroid", [0, 0])[1]
-    bbox_y_start = shape_features["bbox_y_start"]
-    depth_band = segment.get("depth_band")
-    mean_depth = segment.get("mean_depth", 0)
+    Critères :
+    - Très vert (> 50%)
+    - Saturation élevée (> 40)
+    - Taille moyenne (0.5% - 15%)
+    - Texture complexe (variance > 30)
+    - PAS la grande pelouse (area < 10%)
+    """
     area_ratio = segment.get("area_ratio", 0)
-    aspect_ratio = shape_features["aspect_ratio"]
     
-    green_ratio = color_features["green_ratio"]
-    brown_ratio = color_features["brown_ratio"]
-    gray_ratio = color_features["gray_ratio"]
-    saturation = color_features["mean_saturation"]
-    edge_ratio = texture_features["edge_ratio"]
+    # Exclure la grande pelouse
+    if config["exclude_lawn"] and area_ratio >= config["lawn_min_area"]:
+        return False
     
-    # ===== RÈGLE SPÉCIALE : Grande pelouse verte peut être "back" =====
-    is_large_green = (
-        area_ratio >= config["special_rules"]["large_green_min_area"] and
-        green_ratio >= config["special_rules"]["large_green_min_green_ratio"]
-    )
-    
-    if is_large_green and depth_band == "back":
-        # Pelouse en arrière-plan : assouplir les critères
-        print(f"  🌱 Segment {segment['segment_id']}: Large green area in background (lawn)")
-        
-        # Vérifier quand même les critères de base
-        if gray_ratio > config["color"]["max_gray_ratio"]:
-            reasons.append(f"too_much_gray (gray={gray_ratio:.2f})")
-        
-        if edge_ratio > config["texture"]["max_edge_ratio"]:
-            reasons.append(f"high_edge_density (edges={edge_ratio:.2f})")
-        
-        if aspect_ratio > config["shape"]["max_aspect_ratio"] * 1.2:  # Plus permissif
-            reasons.append(f"too_vertical (ratio={aspect_ratio:.1f})")
-        
-        # Si pas de raisons rédhibitoires, accepter
-        if len(reasons) == 0:
-            return True, []
-    
-    # ===== CRITÈRES STANDARD =====
-    
-    # Position
-    if centroid_y < config["position"]["min_y_centroid"]:
-        reasons.append(f"position_too_high (y={centroid_y:.2f})")
-    
-    if bbox_y_start < config["position"]["min_y_bbox"]:
-        reasons.append(f"bbox_starts_too_high (y={bbox_y_start:.2f})")
-    
-    # Profondeur
-    if depth_band not in config["depth"]["allowed_bands"]:
-        reasons.append(f"depth_band_invalid (band={depth_band})")
-    
-    if mean_depth > config["depth"]["max_mean_depth"]:
-        reasons.append(f"depth_too_close (depth={mean_depth:.2f})")
-    
-    if mean_depth < config["depth"]["min_mean_depth"]:
-        reasons.append(f"depth_too_far (depth={mean_depth:.2f})")
+    # Taille
+    if area_ratio < config["min_area_ratio"] or area_ratio > config["max_area_ratio"]:
+        return False
     
     # Couleur
-    is_green = green_ratio >= config["color"]["min_green_ratio"]
-    is_brown = brown_ratio >= config["color"]["min_brown_ratio"]
+    color_features = compute_color_features(img, mask)
     
-    if not (is_green or is_brown):
-        reasons.append(f"color_not_vegetation (green={green_ratio:.2f}, brown={brown_ratio:.2f})")
+    if color_features["green_ratio"] < config["min_green_ratio"]:
+        return False
     
-    if gray_ratio > config["color"]["max_gray_ratio"]:
-        reasons.append(f"too_much_gray (gray={gray_ratio:.2f})")
-    
-    if config["color"]["require_saturation"] and saturation < config["color"]["min_saturation"]:
-        reasons.append(f"low_saturation (sat={saturation:.1f})")
-    
-    # Forme
-    if area_ratio < config["shape"]["min_area_ratio"]:
-        reasons.append(f"too_small (area={area_ratio:.4f})")
-    
-    if area_ratio > config["shape"]["max_area_ratio"]:
-        reasons.append(f"too_large (area={area_ratio:.2f})")
-    
-    if aspect_ratio > config["shape"]["max_aspect_ratio"]:
-        reasons.append(f"too_vertical (ratio={aspect_ratio:.1f})")
+    if color_features["mean_saturation"] < config["min_saturation"]:
+        return False
     
     # Texture
-    if config["texture"]["check_edge_density"] and edge_ratio > config["texture"]["max_edge_ratio"]:
-        reasons.append(f"high_edge_density (edges={edge_ratio:.2f})")
+    if config["check_texture"]:
+        texture_var = compute_texture_variance(img, mask)
+        
+        if texture_var < config["texture_variance_threshold"]:
+            return False  # Trop uniforme = pelouse
     
-    is_plantable = len(reasons) == 0
-    return is_plantable, reasons
+    return True
 
 
-def generate_anchor_points(mask: np.ndarray, num_points: int) -> List[List[float]]:
-    """Génère anchor points."""
+def is_lawn(
+    img: np.ndarray,
+    mask: np.ndarray,
+    config: Dict
+) -> bool:
+    """
+    Détecte si un segment est de la PELOUSE LIBRE (plantable).
+    
+    Critères :
+    - Vert modéré (30-70%)
+    - Saturation modérée (20-60)
+    - Texture UNIFORME (variance < 25)
+    """
+    color_features = compute_color_features(img, mask)
+    
+    # Vert modéré
+    green_ok = (
+        config["min_green_ratio"] <= color_features["green_ratio"] <= config["max_green_ratio"]
+    )
+    
+    # Saturation modérée
+    sat_ok = (
+        config["min_saturation"] <= color_features["mean_saturation"] <= config["max_saturation"]
+    )
+    
+    # Texture uniforme
+    if config["texture_uniformity"]:
+        texture_var = compute_texture_variance(img, mask)
+        texture_ok = texture_var <= config["max_texture_variance"]
+    else:
+        texture_ok = True
+    
+    return green_ok and sat_ok and texture_ok
+
+
+def compute_intersection(mask1: np.ndarray, mask2: np.ndarray) -> float:
+    """Ratio d'intersection."""
+    if mask1.sum() == 0:
+        return 0.0
+    return float((mask1 & mask2).sum()) / mask1.sum()
+
+
+def compute_compactness(mask: np.ndarray, bbox: List[float], H: int, W: int) -> float:
+    """Compacité = area_mask / area_bbox."""
+    area_mask = mask.sum()
+    x, y, w, h = bbox
+    bbox_area = (w * W) * (h * H)
+    return float(area_mask) / bbox_area if bbox_area > 0 else 0.0
+
+
+def morphological_processing(mask: np.ndarray, config: Dict) -> np.ndarray:
+    """Nettoyage morphologique."""
+    kernel = np.ones((config["kernel_size"], config["kernel_size"]), dtype=bool)
+    
+    if config["fill_holes"]:
+        mask = binary_fill_holes(mask)
+    
+    for _ in range(config["smooth_iterations"]):
+        mask = binary_erosion(mask, structure=kernel)
+        mask = binary_dilation(mask, structure=kernel)
+    
+    return mask
+
+
+def generate_anchors_with_spacing(
+    mask: np.ndarray,
+    num_points: int,
+    min_distance: float,
+    border_margin: float
+) -> List[Dict]:
+    """Génère anchors avec espacement."""
     H, W = mask.shape
-    y_coords, x_coords = np.where(mask)
+    
+    margin_x = int(W * border_margin)
+    margin_y = int(H * border_margin)
+    
+    mask_inner = mask.copy()
+    mask_inner[:margin_y, :] = False
+    mask_inner[-margin_y:, :] = False
+    mask_inner[:, :margin_x] = False
+    mask_inner[:, -margin_x:] = False
+    
+    y_coords, x_coords = np.where(mask_inner)
     
     if len(x_coords) == 0:
         return []
     
-    total_pixels = len(x_coords)
-    if total_pixels <= num_points:
-        indices = np.arange(total_pixels)
-    else:
-        indices = np.linspace(0, total_pixels - 1, num_points, dtype=int)
+    min_dist_px = int(min(W, H) * min_distance)
     
-    anchors = []
-    for idx in indices:
-        x_norm = float(x_coords[idx]) / W
-        y_norm = float(y_coords[idx]) / H
-        anchors.append([x_norm, y_norm])
+    selected = []
+    selected_points = []
     
-    return anchors
+    np.random.seed(42)
+    first_idx = np.random.randint(0, len(x_coords))
+    selected.append(first_idx)
+    selected_points.append((x_coords[first_idx], y_coords[first_idx]))
+    
+    max_attempts = len(x_coords) * 2
+    attempts = 0
+    
+    while len(selected) < num_points and attempts < max_attempts:
+        idx = np.random.randint(0, len(x_coords))
+        x, y = x_coords[idx], y_coords[idx]
+        
+        too_close = any(
+            np.sqrt((x - sx)**2 + (y - sy)**2) < min_dist_px
+            for sx, sy in selected_points
+        )
+        
+        if not too_close:
+            selected.append(idx)
+            selected_points.append((x, y))
+        
+        attempts += 1
+    
+    return [
+        {
+            "id": f"p{i+1}",
+            "x": round(float(x) / W, 3),
+            "y": round(float(y) / H, 3),
+            "score": round(float(y) / H, 2)
+        }
+        for i, (x, y) in enumerate(selected_points)
+    ]
 
 
 def main():
     print("=" * 70)
-    print("PLANTABLE ZONE - VERSION FINALE OPTIMISÉE")
+    print("PLANTABLE ZONE - VERSION FINALE (excluant végétation existante)")
     print("=" * 70)
     
     with open(VISION_JSON, "r", encoding="utf-8") as f:
@@ -282,66 +312,179 @@ def main():
     H, W, _ = img.shape
     
     segments = vision.get("segments", [])
-    print(f"Total segments: {len(segments)}")
+    print(f"✅ Loaded {len(segments)} segments")
     
-    print("\n🔍 Analyzing segments...")
-    plantable_segments = []
-    plantable_mask_combined = np.zeros((H, W), dtype=bool)
-    segment_details = []
+    # ===== A) Ground Candidate =====
+    print("\n" + "=" * 70)
+    print("A) GROUND CANDIDATE")
+    print("=" * 70)
+    
+    ground_mask = np.zeros((H, W), dtype=bool)
+    ground_segments = []
     
     for seg in segments:
-        seg_id = seg["segment_id"]
+        centroid = seg.get("centroid", [0, 0])
+        area_ratio = seg.get("area_ratio", 0)
+        bbox = seg.get("bbox", [0, 0, 0, 0])
+        depth_std = seg.get("depth_std", 0)
+        
+        is_ground = (
+            centroid[1] >= CONFIG["ground"]["min_y_centroid"] and
+            area_ratio >= CONFIG["ground"]["min_area_ratio"] and
+            bbox[2] >= CONFIG["ground"]["min_bbox_width"] and
+            (depth_std is None or depth_std <= CONFIG["ground"]["max_depth_std"])
+        )
+        
+        if is_ground:
+            rle = seg["mask_rle"]
+            mask = mask_utils.decode(rle).astype(bool)
+            ground_mask |= mask
+            ground_segments.append(seg["segment_id"])
+            print(f"  ✅ Segment {seg['segment_id']}: ground")
+    
+    print(f"✅ Ground: {len(ground_segments)} segments → {ground_mask.sum()/(H*W):.1%}")
+    
+    ground_mask = morphological_processing(ground_mask, CONFIG["morphology"])
+    
+    # ===== B) Objects on Ground =====
+    print("\n" + "=" * 70)
+    print("B) OBJECTS ON GROUND")
+    print("=" * 70)
+    
+    objects_mask = np.zeros((H, W), dtype=bool)
+    object_segments = []
+    
+    for seg in segments:
+        if seg["segment_id"] in ground_segments:
+            continue
+        
         rle = seg["mask_rle"]
         mask = mask_utils.decode(rle).astype(bool)
         
-        color_features = compute_color_features(img, mask)
-        shape_features = compute_shape_features(seg, H, W)
-        texture_features = compute_texture_features(img, mask)
+        intersection = compute_intersection(mask, ground_mask)
+        area_ratio = seg.get("area_ratio", 0)
+        bbox = seg.get("bbox", [0, 0, 1, 1])
+        compactness = compute_compactness(mask, bbox, H, W)
         
-        is_plant, reasons = is_plantable(seg, color_features, shape_features, texture_features, CONFIG)
+        is_object = (
+            intersection >= CONFIG["objects"]["min_intersection"] and
+            area_ratio <= CONFIG["objects"]["max_area_ratio"] and
+            compactness >= CONFIG["objects"]["compact_threshold"]
+        )
         
-        detail = {
-            "segment_id": seg_id,
-            "area_ratio": seg.get("area_ratio"),
-            "centroid": seg.get("centroid"),
-            "depth_band": seg.get("depth_band"),
-            "mean_depth": seg.get("mean_depth"),
-            "color_features": color_features,
-            "shape_features": shape_features,
-            "texture_features": texture_features,
-            "is_plantable": is_plant,
-            "rejection_reasons": reasons if not is_plant else []
-        }
-        segment_details.append(detail)
+        if is_object:
+            objects_mask |= mask
+            object_segments.append(seg["segment_id"])
+            print(f"  🪑 Segment {seg['segment_id']}: object")
+    
+    print(f"✅ Objects: {len(object_segments)} segments → {objects_mask.sum()/(H*W):.1%}")
+    
+    # ===== C) Existing Vegetation =====
+    print("\n" + "=" * 70)
+    print("C) EXISTING VEGETATION (massifs, arbustes)")
+    print("=" * 70)
+    
+    vegetation_mask = np.zeros((H, W), dtype=bool)
+    vegetation_segments = []
+    
+    for seg in segments:
+        if seg["segment_id"] in ground_segments or seg["segment_id"] in object_segments:
+            continue
         
-        if is_plant:
-            plantable_segments.append(seg_id)
-            plantable_mask_combined |= mask
-            print(f"  ✅ Segment {seg_id}: PLANTABLE")
+        rle = seg["mask_rle"]
+        mask = mask_utils.decode(rle).astype(bool)
+        
+        # Doit être dans/près du ground
+        intersection = compute_intersection(mask, ground_mask)
+        
+        if intersection < 0.3:  # Au moins 30% dans ground
+            continue
+        
+        if is_existing_vegetation(seg, img, mask, CONFIG["existing_vegetation"]):
+            vegetation_mask |= mask
+            vegetation_segments.append(seg["segment_id"])
+            
+            color_feat = compute_color_features(img, mask)
+            texture_var = compute_texture_variance(img, mask)
+            
+            print(f"  🌿 Segment {seg['segment_id']}: existing vegetation "
+                  f"(green={color_feat['green_ratio']:.2f}, "
+                  f"sat={color_feat['mean_saturation']:.0f}, "
+                  f"texture_var={texture_var:.0f})")
     
-    coverage = plantable_mask_combined.sum() / (H * W)
-    print(f"\n✅ Plantable segments: {len(plantable_segments)} / {len(segments)}")
-    print(f"✅ Coverage: {coverage:.1%}")
+    print(f"✅ Vegetation: {len(vegetation_segments)} segments → {vegetation_mask.sum()/(H*W):.1%}")
     
-    anchors = generate_anchor_points(plantable_mask_combined, CONFIG["anchors"]["num_points"])
+    # ===== D) Plantable = Ground - Objects - Vegetation =====
+    print("\n" + "=" * 70)
+    print("D) PLANTABLE = Ground - Objects - Vegetation")
+    print("=" * 70)
     
-    plantable_rle = mask_utils.encode(np.asfortranarray(plantable_mask_combined.astype(np.uint8)))
+    plantable_raw = ground_mask & ~objects_mask & ~vegetation_mask
+    
+    print(f"✅ Plantable (raw): {plantable_raw.sum()/(H*W):.1%}")
+    
+    # ===== E) Filter for LAWN only =====
+    print("\n" + "=" * 70)
+    print("E) FILTER FOR LAWN (pelouse libre)")
+    print("=" * 70)
+    
+    # Vérifier que c'est bien de la pelouse uniforme
+    if is_lawn(img, plantable_raw, CONFIG["lawn"]):
+        plantable_final = plantable_raw
+        print(f"✅ Zone validated as lawn")
+    else:
+        # Filtrer pixel par pixel
+        print(f"⚠️  Applying pixel-level lawn filter...")
+        img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+        
+        lawn_mask = (
+            (img_hsv[:, :, 0] >= 35) & (img_hsv[:, :, 0] <= 85) &  # Vert
+            (img_hsv[:, :, 1] >= CONFIG["lawn"]["min_saturation"]) &
+            (img_hsv[:, :, 1] <= CONFIG["lawn"]["max_saturation"])
+        )
+        
+        plantable_final = plantable_raw & lawn_mask
+    
+    coverage_final = plantable_final.sum() / (H * W)
+    
+    print(f"✅ Plantable (final): {coverage_final:.1%}")
+    
+    # ===== F) Anchors =====
+    print("\n" + "=" * 70)
+    print("F) GENERATE ANCHORS")
+    print("=" * 70)
+    
+    anchors = generate_anchors_with_spacing(
+        plantable_final,
+        CONFIG["anchors"]["num_points"],
+        CONFIG["anchors"]["min_distance"],
+        CONFIG["anchors"]["border_margin"]
+    )
+    
+    print(f"✅ Generated {len(anchors)} anchors")
+    
+    # ===== OUTPUT =====
+    plantable_rle = mask_utils.encode(np.asfortranarray(plantable_final.astype(np.uint8)))
     plantable_rle["counts"] = plantable_rle["counts"].decode("utf-8")
     
     output = {
-        "version": "plantable_zone_v3_optimized",
+        "version": "plantable_zone_final_v1",
         "image_id": vision.get("image_id"),
         "image_size": [W, H],
         "config": CONFIG,
+        "pipeline_steps": {
+            "A_ground": {"segments": ground_segments, "coverage": float(ground_mask.sum()/(H*W))},
+            "B_objects": {"segments": object_segments, "coverage": float(objects_mask.sum()/(H*W))},
+            "C_vegetation": {"segments": vegetation_segments, "coverage": float(vegetation_mask.sum()/(H*W))},
+            "D_plantable_raw": {"coverage": float(plantable_raw.sum()/(H*W))},
+            "E_plantable_final": {"coverage": float(coverage_final)}
+        },
         "plantable": {
-            "segments_count": len(plantable_segments),
-            "segment_ids": plantable_segments,
-            "coverage": coverage,
-            "total_pixels": int(plantable_mask_combined.sum()),
+            "coverage": float(coverage_final),
+            "total_pixels": int(plantable_final.sum()),
             "mask_rle": plantable_rle,
             "anchors": anchors
-        },
-        "segment_analysis": segment_details
+        }
     }
     
     with open(OUT_JSON, "w", encoding="utf-8") as f:
@@ -349,24 +492,15 @@ def main():
     
     print(f"\n✅ Saved {OUT_JSON}")
     
-    # Statistics
+    # ===== SUMMARY =====
     print("\n" + "=" * 70)
-    print("SUMMARY")
+    print("FINAL SUMMARY")
     print("=" * 70)
-    print(f"Plantable segments:   {len(plantable_segments)}/{len(segments)} ({len(plantable_segments)/len(segments):.1%})")
-    print(f"Coverage:             {coverage:.1%}")
-    print(f"Anchors:              {len(anchors)}")
-    
-    print("\n📊 Rejection reasons:")
-    rejection_stats = {}
-    for detail in segment_details:
-        if not detail["is_plantable"]:
-            for reason in detail["rejection_reasons"]:
-                reason_key = reason.split("(")[0].strip()
-                rejection_stats[reason_key] = rejection_stats.get(reason_key, 0) + 1
-    
-    for reason, count in sorted(rejection_stats.items(), key=lambda x: -x[1]):
-        print(f"  - {reason}: {count}")
+    print(f"A) Ground:       {ground_mask.sum()/(H*W):.1%}")
+    print(f"B) - Objects:    {objects_mask.sum()/(H*W):.1%}")
+    print(f"C) - Vegetation: {vegetation_mask.sum()/(H*W):.1%}")
+    print(f"D) = Plantable:  {coverage_final:.1%}")
+    print(f"E) Anchors:      {len(anchors)} points")
 
 
 if __name__ == "__main__":
